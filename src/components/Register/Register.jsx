@@ -1,12 +1,25 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password, name);
+
+    // create user
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -71,5 +84,3 @@ const Register = () => {
 };
 
 export default Register;
-
-// 11.35
