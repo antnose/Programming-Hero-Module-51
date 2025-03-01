@@ -36,3 +36,5 @@ createRoot(document.getElementById("root")).render(
     </AuthProvider>
   </StrictMode>
 );
+
+// 7.07
