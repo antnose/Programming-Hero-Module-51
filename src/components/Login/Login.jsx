@@ -96,7 +96,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Login = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -113,7 +113,16 @@ const Login = () => {
         console.log(error.message);
       });
   };
-
+  const handleGoogleSignIn = () => {
+    handleGoogleSignIn()
+      .then((res) => {
+        console.log(res.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -160,11 +169,16 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
-          <p className="ml-4 mb-6">
+          <p className="ml-4 mb-2">
             New to this website?
             <Link to="/register" className="text-green-500 ml-2">
               Register
             </Link>
+          </p>
+          <p>
+            <button onClick={handleGoogleSignIn} className="btn btn-ghost mb-3">
+              Google
+            </button>
           </p>
         </div>
       </div>

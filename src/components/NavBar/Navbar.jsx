@@ -42,6 +42,9 @@ const Navbar = () => {
           <li>
             <NavLink to="orders">Order</NavLink>
           </li>
+          <li>
+            <NavLink to="/profile">Profile</NavLink>
+          </li>
         </>
       )}
     </>
@@ -88,7 +91,9 @@ const Navbar = () => {
             </a>
           </>
         ) : (
-          <Link to="/login">Login</Link>
+          <>
+            <Link to="/login">Login</Link>
+          </>
         )}
       </div>
     </div>
