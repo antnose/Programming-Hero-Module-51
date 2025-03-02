@@ -11,17 +11,25 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   const name = "potato alo muia";
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const singOutUser = (auth) => {
+  // const signOutUser = (auth) => {
+  //   return signOut(auth);
+  // };
+
+  const signOutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -29,17 +37,19 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
+      setLoading(false);
     });
 
-    return unSubscribe();
+    return () => unSubscribe();
   }, []);
 
   const authInfo = {
     name,
     user,
+    loading,
     createUser,
     signInUser,
-    singOutUser,
+    signOutUser,
   };
 
   return (

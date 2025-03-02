@@ -3,16 +3,26 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
-  const { user, singOutUser } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
   console.log(user);
 
+  // const handleSignOut = () => {
+  //   signOutUser()
+  //     .then(() => {
+  //       console.log("User sign out successfully");
+  //     })
+  //     .catch((error) => {
+  //       console.log(`User can't sign out please try again`);
+  //     });
+  // };
+
   const handleSignOut = () => {
-    singOutUser()
-      .than((res) => {
-        console.log("User sign out successfully");
+    signOutUser()
+      .then(() => {
+        console.log("User signed out successfully");
       })
       .catch((error) => {
-        console.log(`User can't sign out please try again`);
+        console.log("User can't sign out, please try again", error);
       });
   };
 
@@ -27,6 +37,13 @@ const Navbar = () => {
       <li>
         <NavLink to="register">Register</NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="orders">Order</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
